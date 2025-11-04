@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello WelcomeController!{% endblock %}
+
+{% block body %}
+    <div id="react-root"></div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ vite_entry_script_tags('app', { dependency: 'react' }) }}
+{% endblock %}
+

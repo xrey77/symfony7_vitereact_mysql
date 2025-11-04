@@ -1,0 +1,13 @@
+scheb_two_factor:
+    totp:
+        enabled: true
+    # google:
+    #     leeway: 0         
+        # digits: 6
+        # period: 30
+        # algorithm: sha1
+        # Use the endroid QR code bundle for generation
+        # qr_code_generator: endroid        
+    # security_tokens:
+    #     - Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken
+    #     - Symfony\Component\Security\Http\Authenticator\Token\PostAuthenticationToken

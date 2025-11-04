@@ -1,0 +1,5 @@
+SYMFONY 7.3, VITE + REACT - TYPESCRIPT START-UP PROJECT
+
+Dependencies:
+1. node 23.5.1
+2. npm 11.1.0

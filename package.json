@@ -1,0 +1,34 @@
+{
+  "name": "symfony7_vitereact_mysql",
+  "version": "1.0.0",
+  "description": "Symfony 7 + Vite + React Proj",
+  "license": "ISC",
+  "author": "Reynald Marquez-Gragasin",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vite-plugin-symfony": "^8.2.2"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "@types/axios": "^0.9.36",
+    "@types/jquery": "^3.5.33",
+    "@types/react-router-dom": "^5.3.3",
+    "axios": "^1.12.2",
+    "bootstrap": "^5.3.8",
+    "jquery": "^3.7.1",
+    "react-router-dom": "^7.9.5"
+  }
+}
