@@ -6,6 +6,9 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import Profile from './pages/Profile';
+import Prodlist from './pages/Prodlist';
+import Prodcatalog from './pages/Prodcatalog';
+import Prodsearch from './pages/Prodsearch';
 import DefaultLayout from './Layouts/DefaultLayout';
 import './styles/app.css';
 
@@ -19,6 +22,11 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
+
+          <Route path="/productlistings" element={<Prodlist />} />
+          <Route path="/productcatalog" element={<Prodcatalog />} />
+          <Route path="/productsearch" element={<Prodsearch />} />
+
         </Routes>
       </main>
     </BrowserRouter>      

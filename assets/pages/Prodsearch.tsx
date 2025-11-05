@@ -4,7 +4,7 @@ import axios from 'axios';
 import Footer from '../components/Footer';
 
 const api = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://127.0.0.1:8000",
   headers: {'Accept': 'application/json',
             'Content-Type': 'application/json'}
 })
@@ -27,7 +27,7 @@ export default function Prodsearch() {
       setMessage("please wait .");
       api.get(`/api/productsearch/${searchkey}`)
       .then((res: any) => {
-          setProdsearch(res.data.products);
+          setProdsearch(res.data);
           setTimeout(() => {
             setMessage('');
         }, 1000);

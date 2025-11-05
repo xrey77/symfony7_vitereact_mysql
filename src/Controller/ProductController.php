@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use DateTimeImmutable;
 
+
 final class ProductController extends AbstractController
 {
     #[Route('/api/addproduct', name: 'app_addproduct', methods: ['POST'])]
@@ -140,43 +141,10 @@ final class ProductController extends AbstractController
             Response::HTTP_OK,
             ['content-type' => 'application/json']
         );        
-        // return new JsonResponse(['products' => $jsonContent],200);
-
-
-        // $query = $em->createQuery(
-        //     'SELECT p.id,p.category,p.descriptions,p.qty,p.unit,p.costprice,p.sellprice,p.saleprice,p.productpicture,p.alertstocks,p.criticalstocks
-        //     FROM App\Entity\Product p
-        //     ORDER BY p.id ASC'
-        // );
-        // $products = $productRepository->findByLimitAndOffset($perPage, $offset);
-        // $products = $query->getResult();
-        // $products = $query->getParameters();
-
-
-        // $queryBuilder = $productRepository->createQueryBuilder('p')
-        // ->orderBy('p.createdAt', 'DESC');
-        // $adapter = new Pagerfanta\Adapter\DoctrineORMAdapter($queryBuilder);
-        // $pagerfanta = new Pagerfanta($adapter);
-
-        // // 3. Configure pagination
-        // $pagerfanta->setMaxPerPage($perPage);
-        // $pagerfanta->setCurrentPage($offset);
-
-        // createFindAllQueryBuilder();
-
-        // $adapter = new QueryAdapter($queryBuilder);
-        // $pagerfanta = new Pagerfanta($adapter);
-        // $pagerfanta->setMaxPerPage($perPage); // Set the limit
-        // $pagerfanta->setCurrentPage($offset);
-        // return new JsonResponse(['products' => $products],200);
-
-        
-        // if ($products) {
-        //     return new JsonResponse(['products' => $products],200);
-        // } else {
-        //     return new JsonResponse(['message' => 'Products not found.'], 404);
-        // }
     }
+
+
+
 
     #[Route('/api/getproductid/{id}', name: 'app_getproductid', methods: ['GET'])]
     public function getProductId(int $id, EntityManagerInterface $em): JsonResponse
@@ -190,5 +158,40 @@ final class ProductController extends AbstractController
             return $this->json(['message' => 'Product not found.'], 404);
         }
     }
+
+    //SEARCH WILD CARD USING createQueryBuilder
+    #[Route('/api/productsearch/{key}', name: 'app_productsearch', methods: ['GET'])]
+    public function getSearchProduct(
+        string $key, EntityManagerInterface $em,
+        SerializerInterface $serializer,
+        ProductRepository $productRepository
+        ): Response
+    {
+        $search = '%' . strtolower($key) . '%';
+        $qb = $em->getRepository(Product::class)->createQueryBuilder('p');        
+        $qb->where($qb->expr()->like('LOWER(p.descriptions)', ':keyword'))
+           ->setParameter('keyword', $search)
+           ->orderBy('p.descriptions', 'ASC'); 
+
+        $jsonContent = $serializer->serialize($qb->getQuery()->getResult(), 'json');
+
+        return new Response(
+            $jsonContent,
+            Response::HTTP_OK,
+            ['content-type' => 'application/json']
+        );        
+    }
+
+    //SEARCH WILD CARD USING EntityManagerInterface
+    // #[Route('/api/productlist2/{key}', name: 'app_productlist', methods: ['GET'])]
+    // public function getProductList(string $key,EntityManagerInterface $em): Response
+    // {
+    //     $search = '%' . $key . '%';
+    //     $query = $em->createQuery(
+    //         'SELECT p.id,p.category,p.descriptions,p.qty,p.unit,p.costprice,p.sellprice,p.saleprice,p.productpicture,p.alertstocks,p.criticalstocks
+    //         FROM App\Entity\Product p WHERE p.descriptions LIKE :keyword ORDER BY p.id')->setParameter('keyword', $search);        
+    //     return new JsonResponse($query->getResult());
+    // }
+
 
 }

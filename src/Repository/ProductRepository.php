@@ -59,21 +59,6 @@ class ProductRepository extends ServiceEntityRepository
             ->setMaxResults($limit); // This line is what was missing or misapplied
 
         return $paginator;        
-
-
-        // $qb = $this->createQueryBuilder('p')
-        //     ->orderBy('p.createdAt', 'DESC')
-        //     ->setMaxResults($limit)
-        //     ->setFirstResult($offset)
-        //     ->getQuery();
-
-        // return new Paginator($qb);        
-        // return $this->createQueryBuilder('p')
-        //     ->orderBy('p.id', 'ASC')
-        //     ->setFirstResult($offset) // Skip this many items
-        //     ->setMaxResults($limit)   // Take this many items
-        //     ->getQuery()
-        //     ->getResult();
     }
 
 
@@ -93,5 +78,19 @@ class ProductRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->orderBy('p.createdAt', 'DESC');
     }
+
+    public function searchByKeyword(string $keyword): array
+    {
+        $qb = $this->createQueryBuilder('p');
+
+        // Use the LIKE operator in the where clause
+        $qb->where($qb->expr()->like('p.descriptions', ':keyword'))
+           ->setParameter('keyword', '%' . $keyword . '%')
+           ->orderBy('p.id', 'ASC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 }
 

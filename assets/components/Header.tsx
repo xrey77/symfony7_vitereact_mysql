@@ -71,7 +71,7 @@ export default function Header() {
             Products
           </a>
           <ul className="dropdown-menu">
-            <li><Link className="dropdown-item" to="/productlist">Products List</Link></li>
+            <li><Link className="dropdown-item" to="/productlistings">Products List</Link></li>
             <li><Link className="dropdown-item" to="/productcatalog">Products Catalog</Link></li>
             <li><hr className="dropdown-divider"/></li>
             <li><Link className="dropdown-item" to="/productsearch">Product Search</Link></li>
@@ -125,7 +125,7 @@ export default function Header() {
           </Link>
           <ul className="dropdown-menu">
             <li data-bs-dismiss="offcanvas">
-              <Link className="dropdown-item" to="/productlist">Product List</Link></li>
+              <Link className="dropdown-item" to="/productlistings">Product List</Link></li>
             <li data-bs-dismiss="offcanvas">
               <Link className="dropdown-item" to="/productcatalog">Product Catalogs</Link></li>
             <li><hr className="dropdown-divider"/></li>

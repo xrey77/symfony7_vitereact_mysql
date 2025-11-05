@@ -1,10 +1,9 @@
 import axios from 'axios';
-import React from 'react';
 import { useState, useEffect } from 'react';
 import Footer from '../components/Footer';
 
 const api = axios.create({
-  baseURL: "http://localhost:8000",
+  baseURL: "https://127.0.0.1:8000",
   headers: {'Accept': 'application/json',
             'Content-Type': 'application/json'}
 })
@@ -12,6 +11,7 @@ const api = axios.create({
 interface Productdata {
   totpage: string,
   page: string,
+  totalrecs: string,
   products: Products
 }
 
@@ -36,6 +36,8 @@ export default function Prodlist() {
 
     let [page, setPage] = useState<number>(1);
     let [totpage, setTotpage] = useState<number>(0);
+    let [totalrecords, setTotalRecords] = useState<number>(0);
+
     let [products, setProducts] = useState<Productdata[]>([]);
 
     const fetchProducts = async (pg: any) => {
@@ -45,6 +47,7 @@ export default function Prodlist() {
         setProducts(data.products);
         setTotpage(data.totpage);
         setPage(data.page);
+        setTotalRecords(data.totalrecs);
       }, (error: any) => {
               console.log(error.response.data.message);
               return;
@@ -130,8 +133,9 @@ export default function Prodlist() {
           <li className="page-item"><a onClick={firstPage} className="page-link sm" href="/#">First</a></li>
           <li className="page-item page-link text-danger sm">Page&nbsp;{page} of&nbsp;{totpage}</li>
 
-        </ul>
+        </ul>        
       </nav>
+      <div>&nbsp;&nbsp;&nbsp;Total Records : {totalrecords}</div>
         <div className='fixed-bottom'>
           <Footer/>
         </div>
