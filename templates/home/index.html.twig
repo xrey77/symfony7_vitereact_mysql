@@ -1,12 +1,29 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello WelcomeController!{% endblock %}
-
-{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diebold-Nixdorf</title>
+    {# Include Vite assets #}
+    {# comment %} {{ vite_entry_link_tags('app', { dependency: 'react' }) }} {% endcomment #}
+    {{ vite_entry_script_tags('app', { dependency: 'react' }) }}    
+    {# comment %} {{ vite_entry_script('app') }} {% endcomment #}
+</head>
+<body>
     <div id="react-root"></div>
-{% endblock %}
+</body>
+</html>
 
-{% block javascripts %}
-    {{ vite_entry_script_tags('app', { dependency: 'react' }) }}
-{% endblock %}
 
+{# comment %} {% extends 'base.html.twig' #}
+
+{# block title }Hello WelcomeController!{% endblock #}
+
+{# block body #}
+    {# comment %} <div id="react-root"></div> {% endcomment #}
+{# endblock #}
+
+{# block javascripts #}
+    {# comment %} {{ vite_entry_script_tags('app', { dependency: 'react' }) }} {% endcomment #}
+{# endblock #}
+ {# endcomment #}

@@ -8,13 +8,10 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home')]
-    // #[Route('/app/{reactRouting}', name: 'app_react_entry', defaults: ['reactRouting' => null], requirements: ['reactRouting' => '.*'])]    
+
+    #[Route('/{reactRouting}', name: 'app_home', defaults: ['reactRouting' => null], requirements: ['reactRouting' => '.*'], priority: -1)]
     public function index(): Response
     {
-        // return $this->render('base.html.twig');
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('home/index.html.twig');
     }
 }
